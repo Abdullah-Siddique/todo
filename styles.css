@@ -74,11 +74,23 @@ body {
     background-color: #f9f9f9;
     border: 1px solid #ccc;
     border-radius: 5px;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.task-item span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 70%;
 }
 
 .task-item div {
     display: flex;
     gap: 10px;
+    white-space: nowrap;
 }
 
 .task-item button {
@@ -131,12 +143,13 @@ body {
 /* Filter buttons */
 #filter-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     gap: 10px;
+    flex-wrap: nowrap;
 }
 
 .filter-btn {
-    padding: 10px 15px;
+    padding: 8px 15px;
     background-color: #389226;
     color: white;
     border: none;
@@ -144,6 +157,7 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     font-size: larger;
+    white-space: nowrap;
 }
 
 .filter-btn:hover {
@@ -253,4 +267,5 @@ footer a:hover {
         font-size: 12px;
     }
 }
+
 
