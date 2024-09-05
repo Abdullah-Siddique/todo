@@ -17,7 +17,7 @@ window.onload = function() {
 
 // Unique ID Generator
 function generateUniqueId(name) {
-    return `${name}-${Math.floor(Math.random() * 1000000)}`;
+    return name + '-' + Math.floor(Math.random() * 1000000);
 }
 
 document.getElementById('get-id-btn').addEventListener('click', () => {
@@ -29,10 +29,11 @@ document.getElementById('get-id-btn').addEventListener('click', () => {
     }
 });
 
+// Task Management System
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 function addTask(task, date, time) {
-    const userId = localStorage.getItem('userId') || 'Anonymous'; 
+    const userId = localStorage.getItem('userId') || 'Anonymous'; // Get user ID from localStorage or use 'Anonymous'
     const taskObj = { task, date, time, completed: false, userId };
     tasks.push(taskObj);
     saveTasks();
@@ -61,13 +62,10 @@ function filterTasks(criteria) {
             return taskDate.toDateString() === today.toDateString();
         });
     } else if (criteria === 'week') {
-        const startOfWeek = new Date(today);
-        startOfWeek.setDate(today.getDate() - today.getDay());
-        const endOfWeek = new Date(today);
-        endOfWeek.setDate(today.getDate() + (6 - today.getDay()));
+        const startOfWeek = today.getDate() - today.getDay();
         filteredTasks = tasks.filter(task => {
             const taskDate = new Date(`${task.date}T${task.time}`);
-            return taskDate >= startOfWeek && taskDate <= endOfWeek;
+            return taskDate >= new Date(today.setDate(startOfWeek)) && taskDate <= new Date(today.setDate(startOfWeek + 7));
         });
     } else if (criteria === 'month') {
         filteredTasks = tasks.filter(task => {
@@ -102,6 +100,7 @@ function renderTasks(taskArray) {
     });
 }
 
+// Stylish buttons with hover effects
 document.addEventListener("DOMContentLoaded", () => {
     const styleSheet = document.createElement("style");
     styleSheet.innerHTML = `
