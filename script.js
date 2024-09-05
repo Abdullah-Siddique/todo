@@ -29,7 +29,6 @@ document.getElementById('get-id-btn').addEventListener('click', () => {
     }
 });
 
-
 // Task Management System
 let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
@@ -101,7 +100,6 @@ function renderTasks(taskArray) {
     });
 }
 
-
 // Stylish buttons with hover effects
 document.addEventListener("DOMContentLoaded", () => {
     const styleSheet = document.createElement("style");
@@ -172,5 +170,6 @@ document.querySelectorAll('.filter-btn').forEach(button => {
         filterTasks(filter);
     });
 });
+
 
 
