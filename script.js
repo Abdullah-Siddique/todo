@@ -11,30 +11,15 @@ function typeNote() {
 }
 
 window.onload = function() {
-    typeNote();
-    loadTasks();
+    typeNote(); // Start typing effect for the note
+    typeWriter(); // Start typing effect for the header
 };
 
-// Unique ID Generator
-function generateUniqueId(name) {
-    return `${name}-${Math.floor(Math.random() * 1000000)}`;
-}
 
-document.getElementById('get-id-btn').addEventListener('click', () => {
-    const userName = document.getElementById('user-name').value;
-    if (userName) {
-        const userId = generateUniqueId(userName);
-        document.getElementById('user-id-display').innerText = `Your ID: ${userId}`;
-        localStorage.setItem('userId', userId); // Store user ID in localStorage
-    }
-});
-
-// Task Management System
-let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+let tasks = [];
 
 function addTask(task, date, time) {
-    const userId = localStorage.getItem('userId') || 'Anonymous'; // Get user ID from localStorage or use 'Anonymous'
-    const taskObj = { task, date, time, completed: false, userId };
+    const taskObj = { task, date, time, completed: false };
     tasks.push(taskObj);
     saveTasks();
     renderTasks(tasks);
@@ -101,57 +86,6 @@ function renderTasks(taskArray) {
 
         taskList.appendChild(taskItem);
     });
-}
-
-// Stylish buttons with hover effects
-document.addEventListener("DOMContentLoaded", () => {
-    const styleSheet = document.createElement("style");
-    styleSheet.innerHTML = `
-        .complete-btn {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        
-        .complete-btn:hover {
-            background-color: #218838;
-        }
-
-        .delete-btn {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .delete-btn:hover {
-            background-color: #c82333;
-        }
-
-        .task-item.completed span {
-            text-decoration: line-through;
-            color: #6c757d;
-        }
-    `;
-    document.head.appendChild(styleSheet);
-});
-
-function saveTasks() {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-}
-
-function loadTasks() {
-    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    renderTasks(tasks);
 }
 
 document.getElementById('add-task-btn').addEventListener('click', () => {
