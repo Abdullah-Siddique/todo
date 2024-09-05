@@ -53,15 +53,17 @@ body {
     border: none;
     font-size: 18px;
     color: white;
-    background-color: #3b8d2a; 
+    background-color: #3b8d2a; /* Add Task and Get ID initial color */
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #add-task-btn:hover, #get-id-btn:hover {
-    background-color: #45a041; 
-    transform: scale(1.05); 
+    background-color: #45a041; /* Lighter green on hover */
+    transform: scale(1.05); /* Slight grow effect on hover */
+}
 
+/* Task list styling */
 .task-item {
     display: flex;
     justify-content: space-between;
@@ -73,6 +75,7 @@ body {
     border-radius: 5px;
 }
 
+/* Button styles for each task */
 .task-item div {
     display: flex;
     gap: 10px;
@@ -119,11 +122,13 @@ body {
     transform: scale(1.05);
 }
 
+/* Line-through completed task */
 .completed-task {
     text-decoration: line-through;
     color: gray;
 }
 
+/* Filter buttons styling */
 #filter-container {
     display: flex;
     justify-content: center;
@@ -185,4 +190,3 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
-
