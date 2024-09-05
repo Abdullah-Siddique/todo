@@ -1,3 +1,4 @@
+/* Base Styles for Desktop */
 body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg, #e0f7fa, #ffffff);
@@ -53,14 +54,14 @@ body {
     border: none;
     font-size: 18px;
     color: white;
-    background-color: #3b8d2a; /* Add Task and Get ID initial color */
+    background-color: #3b8d2a;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #add-task-btn:hover, #get-id-btn:hover {
-    background-color: #45a041; /* Lighter green on hover */
-    transform: scale(1.05); /* Slight grow effect on hover */
+    background-color: #45a041;
+    transform: scale(1.05);
 }
 
 /* Task list styling */
@@ -75,7 +76,6 @@ body {
     border-radius: 5px;
 }
 
-/* Button styles for each task */
 .task-item div {
     display: flex;
     gap: 10px;
@@ -90,45 +90,45 @@ body {
 }
 
 .task-item button.complete {
-    background-color: #28a745; /* Green for Complete */
+    background-color: #28a745;
     color: white;
     border: none;
 }
 
 .task-item button.complete:hover {
-    background-color: #218838; /* Darker green on hover */
+    background-color: #218838;
     transform: scale(1.05);
 }
 
 .task-item button.delete {
-    background-color: #dc3545; /* Red for Delete */
+    background-color: #dc3545;
     color: white;
     border: none;
 }
 
 .task-item button.delete:hover {
-    background-color: #c82333; /* Darker red on hover */
+    background-color: #c82333;
     transform: scale(1.05);
 }
 
 .task-item button.undo {
-    background-color: #ffc107; /* Yellow for Undo */
+    background-color: #ffc107;
     color: black;
     border: none;
 }
 
 .task-item button.undo:hover {
-    background-color: #e0a800; /* Darker yellow on hover */
+    background-color: #e0a800;
     transform: scale(1.05);
 }
 
-/* Line-through completed task */
+/* Completed task */
 .completed-task {
     text-decoration: line-through;
     color: gray;
 }
 
-/* Filter buttons styling */
+/* Filter buttons */
 #filter-container {
     display: flex;
     justify-content: center;
@@ -147,10 +147,11 @@ body {
 }
 
 .filter-btn:hover {
-    background-color: #45a041; /* Lighter green on hover */
+    background-color: #45a041;
     transform: scale(1.05);
 }
 
+/* Colorful button */
 .colorful-button {
     background: linear-gradient(45deg, #ee1b08, #e03004, #ffcf56, #98ff6c, #f00af0, #566eff);
     background-size: 400% 400%;
@@ -190,3 +191,66 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+
+/* Tablet Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    #user-name, #task-input, #date-input, #time-input, #add-task-btn, #get-id-btn {
+        max-width: 100%;
+        font-size: 16px;
+    }
+
+    #add-task-btn, #get-id-btn {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .filter-btn {
+        font-size: medium;
+    }
+    
+    .task-item {
+        font-size: 14px;
+    }
+}
+
+/* Mobile Design */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        width: 95%;
+        padding: 15px;
+        box-shadow: none;
+    }
+
+    #user-name, #task-input, #date-input, #time-input, #add-task-btn, #get-id-btn {
+        font-size: 14px;
+    }
+
+    #add-task-btn, #get-id-btn {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .filter-btn {
+        padding: 8px;
+        font-size: small;
+    }
+
+    .task-item {
+        font-size: 12px;
+    }
+    
+    .task-item button {
+        padding: 8px;
+        font-size: 12px;
+    }
+}
+
