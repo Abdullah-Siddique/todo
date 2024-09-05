@@ -78,15 +78,14 @@ body {
     text-overflow: ellipsis;
     font-size: 16px;
     min-width: 0;
-    flex-wrap: nowrap;
-    flex-grow: 1;
+    width: 100%; /* Ensure task item takes full width */
 }
 
 .task-item span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 80%; /* Adjust this to fit text in one line */
+    flex: 1; /* Allows text to use available space */
 }
 
 .task-item div {
@@ -233,7 +232,7 @@ footer a:hover {
     }
 
     .task-item span {
-        max-width: 75%;
+        max-width: 80%; /* Adjust this to fit text in one line */
     }
 }
 
@@ -268,7 +267,7 @@ footer a:hover {
     }
 
     .task-item span {
-        max-width: 70%; /* Adjusted for small screens */
+        max-width: 100%; /* Ensure full width for small screens */
     }
     
     .task-item button {
@@ -276,6 +275,7 @@ footer a:hover {
         font-size: 12px;
     }
 }
+
 
 
 
