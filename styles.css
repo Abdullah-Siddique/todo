@@ -24,6 +24,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     min-height: 60vh;
+    overflow: hidden; /* Prevents overflow of elements */
 }
 
 #note {
@@ -38,7 +39,7 @@ body {
 
 #user-name, #task-input, #date-input, #time-input, #add-task-btn, #get-id-btn {
     width: 100%;
-    max-width: 600px;
+    max-width: 100%; /* Makes sure elements do not exceed container */
     padding: 10px;
     margin-bottom: 10px;
     border: 2px solid #333;
@@ -47,8 +48,6 @@ body {
 }
 
 #add-task-btn, #get-id-btn {
-    width: 100%;
-    max-width: 600px;
     padding: 12px;
     border-radius: 8px;
     border: none;
@@ -78,14 +77,16 @@ body {
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 16px;
-    min-width: 0; 
+    min-width: 0;
+    flex-wrap: nowrap;
+    flex-grow: 1;
 }
 
 .task-item span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 70%;
+    max-width: 80%; /* Adjust this to fit text in one line */
 }
 
 .task-item div {
@@ -158,7 +159,6 @@ body {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     font-size: larger;
-    white-space: nowrap;
 }
 
 .filter-btn:hover {
@@ -231,6 +231,10 @@ footer a:hover {
     .task-item {
         font-size: 14px;
     }
+
+    .task-item span {
+        max-width: 75%;
+    }
 }
 
 /* Mobile Design */
@@ -262,11 +266,16 @@ footer a:hover {
     .task-item {
         font-size: 12px;
     }
+
+    .task-item span {
+        max-width: 70%; /* Adjusted for small screens */
+    }
     
     .task-item button {
         padding: 8px;
         font-size: 12px;
     }
 }
+
 
 
