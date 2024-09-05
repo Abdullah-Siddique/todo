@@ -90,7 +90,7 @@ function renderTasks(taskArray) {
         taskItem.className = 'task-item' + (task.completed ? ' completed' : '');
 
         taskItem.innerHTML = `
-            <span>${task.task} - ${formattedDateTime} - User ID: ${task.userId}</span>
+            <span>${task.task} - ${formattedDateTime}</span>
             <div>
                 <button class="complete-btn" onclick="toggleComplete(${index})">${task.completed ? 'Undo' : 'Complete'}</button>
                 <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>
@@ -100,6 +100,7 @@ function renderTasks(taskArray) {
         taskList.appendChild(taskItem);
     });
 }
+
 
 // Stylish buttons with hover effects
 document.addEventListener("DOMContentLoaded", () => {
