@@ -1,6 +1,6 @@
 const noteText = "Note your daily activities and works.";
 let noteIndex = 0;
-const noteSpeed = 100; // Typing speed in milliseconds
+const noteSpeed = 100;
 
 function typeNote() {
     if (noteIndex < noteText.length) {
@@ -11,26 +11,43 @@ function typeNote() {
 }
 
 window.onload = function() {
-    typeNote(); // Start typing effect for the note
-    typeWriter(); // Start typing effect for the header
+    typeNote();
+    loadTasks();
 };
 
+// Unique ID Generator
+function generateUniqueId(name) {
+    return `${name}-${Math.floor(Math.random() * 1000000)}`;
+}
 
-let tasks = [];
+document.getElementById('get-id-btn').addEventListener('click', () => {
+    const userName = document.getElementById('user-name').value;
+    if (userName) {
+        const userId = generateUniqueId(userName);
+        document.getElementById('user-id-display').innerText = `Your ID: ${userId}`;
+        localStorage.setItem('userId', userId); // Store user ID in localStorage
+    }
+});
+
+let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
 function addTask(task, date, time) {
-    const taskObj = { task, date, time, completed: false };
+    const userId = localStorage.getItem('userId') || 'Anonymous'; 
+    const taskObj = { task, date, time, completed: false, userId };
     tasks.push(taskObj);
+    saveTasks();
     renderTasks(tasks);
 }
 
 function deleteTask(index) {
     tasks.splice(index, 1);
+    saveTasks();
     renderTasks(tasks);
 }
 
 function toggleComplete(index) {
     tasks[index].completed = !tasks[index].completed;
+    saveTasks();
     renderTasks(tasks);
 }
 
@@ -44,10 +61,13 @@ function filterTasks(criteria) {
             return taskDate.toDateString() === today.toDateString();
         });
     } else if (criteria === 'week') {
-        const startOfWeek = today.getDate() - today.getDay();
+        const startOfWeek = new Date(today);
+        startOfWeek.setDate(today.getDate() - today.getDay());
+        const endOfWeek = new Date(today);
+        endOfWeek.setDate(today.getDate() + (6 - today.getDay()));
         filteredTasks = tasks.filter(task => {
             const taskDate = new Date(`${task.date}T${task.time}`);
-            return taskDate > new Date(today.setDate(startOfWeek)) && taskDate < new Date(today.setDate(startOfWeek + 7));
+            return taskDate >= startOfWeek && taskDate <= endOfWeek;
         });
     } else if (criteria === 'month') {
         filteredTasks = tasks.filter(task => {
@@ -71,15 +91,65 @@ function renderTasks(taskArray) {
         taskItem.className = 'task-item' + (task.completed ? ' completed' : '');
 
         taskItem.innerHTML = `
-            <span>${task.task} - ${formattedDateTime}</span>
+            <span>${task.task} - ${formattedDateTime} - User ID: ${task.userId}</span>
             <div>
-                <button onclick="toggleComplete(${index})">${task.completed ? 'Undo' : 'Complete'}</button>
-                <button onclick="deleteTask(${index})">Delete</button>
+                <button class="complete-btn" onclick="toggleComplete(${index})">${task.completed ? 'Undo' : 'Complete'}</button>
+                <button class="delete-btn" onclick="deleteTask(${index})">Delete</button>
             </div>
         `;
 
         taskList.appendChild(taskItem);
     });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const styleSheet = document.createElement("style");
+    styleSheet.innerHTML = `
+        .complete-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .complete-btn:hover {
+            background-color: #218838;
+        }
+
+        .delete-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .task-item.completed span {
+            text-decoration: line-through;
+            color: #6c757d;
+        }
+    `;
+    document.head.appendChild(styleSheet);
+});
+
+function saveTasks() {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function loadTasks() {
+    tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    renderTasks(tasks);
 }
 
 document.getElementById('add-task-btn').addEventListener('click', () => {
@@ -89,12 +159,17 @@ document.getElementById('add-task-btn').addEventListener('click', () => {
     
     if (taskInput && dateInput && timeInput) {
         addTask(taskInput, dateInput, timeInput);
+        document.getElementById('task-input').value = ''; // Clear input after adding task
+        document.getElementById('date-input').value = '';
+        document.getElementById('time-input').value = '';
     }
 });
 
-document.querySelectorAll('.filter-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        filterTasks(e.target.dataset.filter);
+document.querySelectorAll('.filter-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const filter = button.getAttribute('data-filter');
+        filterTasks(filter);
     });
 });
+
 
