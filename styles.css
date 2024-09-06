@@ -24,7 +24,7 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     min-height: 60vh;
-    overflow: hidden; /* Prevents overflow of elements */
+    overflow: hidden;
 }
 
 #note {
@@ -39,7 +39,7 @@ body {
 
 #user-name, #task-input, #date-input, #time-input, #add-task-btn, #get-id-btn {
     width: 100%;
-    max-width: 100%; /* Makes sure elements do not exceed container */
+    max-width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 2px solid #333;
@@ -78,14 +78,14 @@ body {
     text-overflow: ellipsis;
     font-size: 16px;
     min-width: 0;
-    width: 100%; /* Ensure task item takes full width */
+    width: 100%;
 }
 
 .task-item span {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    flex: 1; /* Allows text to use available space */
+    flex: 1;
 }
 
 .task-item div {
@@ -192,7 +192,7 @@ body {
 #user-id-display-container {
     margin-bottom: 20px;
     padding: 10px;
-    background-color: #e0f7fa; /* Light background for the user ID section */
+    background-color: #e0f7fa;
     border: 2px solid #333;
     border-radius: 5px;
     text-align: center;
@@ -200,7 +200,6 @@ body {
     font-weight: bold;
     color: #333;
 }
-
 
 /* Footer */
 footer {
@@ -247,7 +246,7 @@ footer a:hover {
     }
 
     .task-item span {
-        max-width: 80%; /* Adjust this to fit text in one line */
+        max-width: 80%;
     }
 }
 
@@ -282,7 +281,7 @@ footer a:hover {
     }
 
     .task-item span {
-        max-width: 100%; /* Ensure full width for small screens */
+        max-width: 100%;
     }
     
     .task-item button {
@@ -290,6 +289,7 @@ footer a:hover {
         font-size: 12px;
     }
 }
+
 
 
 
