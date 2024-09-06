@@ -13,6 +13,12 @@ function typeNote() {
 window.onload = function() {
     typeNote();
     loadTasks();
+
+    // Check if userId exists in localStorage and display it
+    const savedUserId = localStorage.getItem('userId');
+    if (savedUserId) {
+        document.getElementById('user-id-display').innerText = `Your ID: ${savedUserId}`;
+    }
 };
 
 // Unique ID Generator
@@ -170,6 +176,7 @@ document.querySelectorAll('.filter-btn').forEach(button => {
         filterTasks(filter);
     });
 });
+
 
 
 
